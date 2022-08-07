@@ -3,8 +3,6 @@ package hello.hellospring.repository;
 import hello.hellospring.domain.Member;
 import hello.hellospring.mapper.MemberRepository;
 import hello.hellospring.mapper.MemoryMemberRepository;
-import org.jetbrains.annotations.NotNull;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -13,15 +11,17 @@ public class MemoryMemberRepositoryTest {
 
     MemberRepository repository = new MemoryMemberRepository() {
         @Test
-        public void save(@NotNull Member member) {
-            Member m = new Member();
-            m.setName("김요섭");
-
-            repository.save(m);
-
+        public void save() {
+//given
+            Member member = new Member();
+            member.setName("spring");
+//when
+            repository.save(member);
+//then
             Member result = repository.findById(member.getId()).get();
-            Assertions.assertEquals(m, result);
+            assertThat(result).isEqualTo(member);
         }
+
 
         @Test
         public void findByName(){

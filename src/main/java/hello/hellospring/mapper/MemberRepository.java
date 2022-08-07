@@ -6,9 +6,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+/* mapper -> db save */
 @Repository
 public interface MemberRepository {
-    void save(Member member);
+    Member save(Member member);
     Optional<Member> findById(Long id);
     Optional<Member> findByName(String name);
     List<Member> findAll();

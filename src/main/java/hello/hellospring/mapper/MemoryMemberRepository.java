@@ -9,10 +9,14 @@ public class MemoryMemberRepository implements MemberRepository {
     private static Map<Long, Member> store = new HashMap<>();
     private static long seq = 0L;
 
+    public MemoryMemberRepository() {
+    }
+
     @Override
-    public void save(Member member) {
+    public Member save(Member member) {
         member.setId(++seq);
         store.put(member.getId(), member);
+        return member;
     }
 
     @Override
@@ -31,7 +35,6 @@ public class MemoryMemberRepository implements MemberRepository {
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
     }
-
     public void clearStore() {
         store.clear();
     }
